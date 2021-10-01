@@ -1,10 +1,7 @@
-class {
+class BulletBoss {
     constructor(x,y) {
         this.x = x;
         this.y = y;
-
-    }
-    drawBoss(){
-
+        this.speed = 2;
     }
 }

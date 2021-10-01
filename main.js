@@ -44,7 +44,7 @@ function play() {
         bullets[i].move();
         bullets[i].draw(ctx);
     }
-    if(cuDa.point < 200){
+    if(cuDa.point < 3){
         for (let i = 0; i < enemys1.length; i++) {
             enemys1[i].update();
             if (enemys1[i].y > 460) {
@@ -53,8 +53,12 @@ function play() {
             checkCollision1();
             enemys1[i].drawEnemy(ctx);
         }
+    } else {
+        boss.move();
+        boss.check();
+        boss.drawBoss(ctx);
     }
-    if (cuDa.point < 200){
+    if (cuDa.point < 3){
         for (let i = 0; i < enemys2.length; i++) {
             enemys2[i].update();
             if (enemys2[i].x > 550) {
@@ -64,7 +68,7 @@ function play() {
             enemys2[i].drawEnemy(ctx);
         }
     }
-    if(cuDa.point < 200){
+    if(cuDa.point < 3){
         for (let i = 0; i < enemys3.length; i++) {
             enemys3[i].update();
             if (enemys3[i].x < 0) {
@@ -74,7 +78,7 @@ function play() {
             enemys3[i].drawEnemy(ctx);
         }
     }
-    if(cuDa.point < 200){
+    if(cuDa.point < 3){
         for (let i = 0; i < enemys4.length; i++) {
             enemys4[i].update();
             if (enemys4[i].y < 0) {
@@ -100,17 +104,16 @@ function createEnemy1() {
     rotate(cuDa.x,cuDa.y,ene1X,ene1Y);
     let dirX = Math.cos(angle);
     let dirY = Math.sin(angle);
-    let enemy1 = new ENEMY(ene1X, ene1Y,dirX,dirY);
+    let enemy1 = new Enemy(ene1X, ene1Y,dirX,dirY);
     enemys1.push(enemy1);
 }
-
 function createEnemy2() {
     let ene2X = 0;
     let ene2Y = Math.floor(Math.random() * 460);
     rotate(cuDa.x,cuDa.y,ene2X,ene2Y);
     let dirX = Math.cos(angle);
     let dirY = Math.sin(angle);
-    let enemy2 = new ENEMY(ene2X,ene2Y ,dirX,dirY);
+    let enemy2 = new Enemy(ene2X,ene2Y ,dirX,dirY);
     enemys2.push(enemy2);
 }
 function createEnemy3() {
@@ -119,7 +122,7 @@ function createEnemy3() {
     rotate(cuDa.x,cuDa.y,ene3X,ene3Y);
     let dirX = Math.cos(angle);
     let dirY = Math.sin(angle);
-    let enemy3 = new ENEMY(ene3X,ene3Y ,dirX,dirY);
+    let enemy3 = new Enemy(ene3X,ene3Y ,dirX,dirY);
     enemys3.push(enemy3);
 }
 function createEnemy4() {
@@ -128,9 +131,10 @@ function createEnemy4() {
     rotate(cuDa.x,cuDa.y,ene4X,ene4Y);
     let dirX = Math.cos(angle);
     let dirY = Math.sin(angle);
-    let enemy4 = new ENEMY(ene4X, ene4Y,dirX,dirY);
+    let enemy4 = new Enemy(ene4X, ene4Y,dirX,dirY);
     enemys4.push(enemy4);
 }
+
 function rotate(playerX, playerY,enemyX,enemyY) {
     let dx = playerX - enemyX ;
     let dy = playerY - enemyY ;
@@ -282,7 +286,8 @@ function playerCollisionenemy4 () {
 //     }
 // }
 let ctx = document.getElementById('canvas').getContext('2d');
-let cuDa = new PLAYER(400, 300, 50, 60, 3, 'anh/cudapro.jpg', 38);
+let boss = new Boss(250,20);
+let cuDa = new Player(400, 300, 50, 60, 3, 'anh/cudapro.jpg', 38);
 cuDa.draw(ctx)
 let angle = 0;
 let bullets = [];

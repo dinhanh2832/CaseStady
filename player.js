@@ -1,4 +1,4 @@
-class PLAYER {
+class Player {
     constructor(x,y,width,height,speed,img,direction) {
         this.height = height;
         this.width = width;
