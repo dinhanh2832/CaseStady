@@ -1,11 +1,12 @@
 class Enemy {
-    constructor(x,y,directionX,directionY) {
+    constructor(x,y,directionX,directionY,img) {
         this.x = x;
         this.y = y;
         this.status = true;
         this.power = 1;
         this.speedX = directionX*this.power;
         this.speedY = directionY*this.power;
+        this.img = img;
     }
 
     update(){
@@ -20,9 +21,9 @@ class Enemy {
             let img = new Image();
             ctx.beginPath();
             img.onload = function () {
-                ctx.drawImage(img,x,y,50,40);
+                ctx.drawImage(img,x,y,100,80);
             }
-            img.src = "anh/anhbanh.jpg"
+            img.src = this.img;
             ctx.fill();
             ctx.closePath();
         }

@@ -10,7 +10,7 @@ class Boss {
         this.x += this.speed;
     }
     check(){
-        if(this.x < 0 || this.x > 500){
+        if(this.x < 0 || this.x > 1200){
             this.speed = - this.speed;
         }
     }
@@ -20,7 +20,7 @@ class Boss {
         let img = new Image();
         ctx.beginPath();
         img.onload = function () {
-            ctx.drawImage(img,x,y,100,150);
+            ctx.drawImage(img,x,y,200,300);
         }
         img.src = "anh/boss.jpg";
         ctx.fill();

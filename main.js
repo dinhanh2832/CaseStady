@@ -9,7 +9,7 @@ function movePlayer(evt) {
             break;
         case 39:
             cuDa.direction = 39;
-            if (cuDa.x < 600 - cuDa.width) {
+            if (cuDa.x < 1200 - cuDa.width) {
                 cuDa.image = "anh/cudaRight.jpg";
                 cuDa.moveRight();
             }
@@ -17,14 +17,14 @@ function movePlayer(evt) {
         case 38:
             cuDa.direction = 38;
             if (cuDa.y > 0) {
-                cuDa.image = "anh/cudapro.jpg";
+                cuDa.image = "anh/cudaUp.jpg";
                 cuDa.moveUp();
             }
             break;
         case 40:
             cuDa.direction = 40;
-            if (cuDa.y <= 500 - cuDa.height) {
-                cuDa.image = "anh/cudaDow.jpg";
+            if (cuDa.y < 700 - cuDa.height) {
+                cuDa.image = "anh/cudaDown.jpg";
                 cuDa.moveDown();
             }
             break;
@@ -41,7 +41,7 @@ function play() {
         bullets[i].move();
         bullets[i].draw(ctx);
     }
-    if (cuDa.point < 3) {
+    if (cuDa.point < 200) {
         for (let i = 0; i < enemys1.length; i++) {
             enemys1[i].update();
             if (enemys1[i].y > 460) {
@@ -95,41 +95,40 @@ function play() {
     drawHpBoss();
     requestAnimationFrame(play)
 }
-
 function createEnemy1() {
-    let ene1X = Math.floor(Math.random() * 550);
+    let ene1X = Math.floor(Math.random() * 1080);
     let ene1Y = 0;
     rotate(cuDa.x, cuDa.y, ene1X, ene1Y);
     let dirX = Math.cos(angle);
     let dirY = Math.sin(angle);
-    let enemy1 = new Enemy(ene1X, ene1Y, dirX, dirY);
+    let enemy1 = new Enemy(ene1X, ene1Y, dirX, dirY,"anh/anhbanhUp.jpg");
     enemys1.push(enemy1);
 }
 function createEnemy2() {
     let ene2X = 0;
-    let ene2Y = Math.floor(Math.random() * 460);
+    let ene2Y = Math.floor(Math.random() * 590);
     rotate(cuDa.x, cuDa.y, ene2X, ene2Y);
     let dirX = Math.cos(angle);
     let dirY = Math.sin(angle);
-    let enemy2 = new Enemy(ene2X, ene2Y, dirX, dirY);
+    let enemy2 = new Enemy(ene2X, ene2Y, dirX, dirY,"anh/anhbanhRight.jpg");
     enemys2.push(enemy2);
 }
 function createEnemy3() {
-    let ene3X = 550;
-    let ene3Y = Math.floor(Math.random() * 460);
+    let ene3X = 1080;
+    let ene3Y = Math.floor(Math.random() * 590);
     rotate(cuDa.x, cuDa.y, ene3X, ene3Y);
     let dirX = Math.cos(angle);
     let dirY = Math.sin(angle);
-    let enemy3 = new Enemy(ene3X, ene3Y, dirX, dirY);
+    let enemy3 = new Enemy(ene3X, ene3Y, dirX, dirY,"anh/anhbanhLeft.jpg");
     enemys3.push(enemy3);
 }
 function createEnemy4() {
-    let ene4X = Math.floor(Math.random() * 550);
-    let ene4Y = 460
+    let ene4X = Math.floor(Math.random() * 1080);
+    let ene4Y = 590;
     rotate(cuDa.x, cuDa.y, ene4X, ene4Y);
     let dirX = Math.cos(angle);
     let dirY = Math.sin(angle);
-    let enemy4 = new Enemy(ene4X, ene4Y, dirX, dirY);
+    let enemy4 = new Enemy(ene4X, ene4Y, dirX, dirY,"anh/anhbanhDown.jpg");
     enemys4.push(enemy4);
 }
 
@@ -173,10 +172,10 @@ function checkCollision1() {
     for (let i = 0; i < bullets.length; i++) {
         for (let j = 0; j < enemys1.length; j++) {
             if (bullets[i].status === true && enemys1[j].status === true) {
-                if (bullets[i].x + 30 > enemys1[j].x && bullets[i].x + 30 < enemys1[j].x + 50 ||
-                    enemys1[j].x < bullets[i].x && bullets[i].x < enemys1[j].x + 50) {
-                    if (bullets[i].y + 30 > enemys1[j].y && bullets[i].y + 30 < enemys1[j].y + 50 ||
-                        enemys1[j].y < bullets[i].y && bullets[i].y < enemys1[j].y + 40) {
+                if (bullets[i].x + 30 > enemys1[j].x && bullets[i].x + 30 < enemys1[j].x + 100 ||
+                    enemys1[j].x < bullets[i].x && bullets[i].x < enemys1[j].x + 100) {
+                    if (bullets[i].y + 30 > enemys1[j].y && bullets[i].y + 30 < enemys1[j].y + 80 ||
+                        enemys1[j].y < bullets[i].y && bullets[i].y < enemys1[j].y + 80) {
                         bullets[i].status = false;
                         enemys1[j].status = false;
                         cuDa.point++;
@@ -190,10 +189,10 @@ function checkCollision2() {
     for (let i = 0; i < bullets.length; i++) {
         for (let j = 0; j < enemys2.length; j++) {
             if (bullets[i].status === true && enemys2[j].status === true) {
-                if (bullets[i].x + 30 > enemys2[j].x && bullets[i].x + 30 < enemys2[j].x + 50 ||
-                    enemys2[j].x < bullets[i].x && bullets[i].x < enemys2[j].x + 50) {
-                    if (bullets[i].y + 30 > enemys2[j].y && bullets[i].y + 30 < enemys2[j].y + 50 ||
-                        enemys2[j].y < bullets[i].y && bullets[i].y < enemys2[j].y + 40) {
+                if (bullets[i].x + 30 > enemys2[j].x && bullets[i].x + 30 < enemys2[j].x + 100 ||
+                    enemys2[j].x < bullets[i].x && bullets[i].x < enemys2[j].x + 100) {
+                    if (bullets[i].y + 30 > enemys2[j].y && bullets[i].y + 30 < enemys2[j].y + 80 ||
+                        enemys2[j].y < bullets[i].y && bullets[i].y < enemys2[j].y + 80) {
                         bullets[i].status = false;
                         enemys2[j].status = false;
                         cuDa.point++;
@@ -207,10 +206,10 @@ function checkCollision3() {
     for (let i = 0; i < bullets.length; i++) {
         for (let j = 0; j < enemys3.length; j++) {
             if (bullets[i].status === true && enemys3[j].status === true) {
-                if (bullets[i].x + 30 > enemys3[j].x && bullets[i].x + 30 < enemys3[j].x + 50 ||
-                    enemys3[j].x < bullets[i].x && bullets[i].x < enemys3[j].x + 50) {
-                    if (bullets[i].y + 30 > enemys3[j].y && bullets[i].y + 30 < enemys3[j].y + 50 ||
-                        enemys3[j].y < bullets[i].y && bullets[i].y < enemys3[j].y + 40) {
+                if (bullets[i].x + 30 > enemys3[j].x && bullets[i].x + 30 < enemys3[j].x + 100 ||
+                    enemys3[j].x < bullets[i].x && bullets[i].x < enemys3[j].x + 100) {
+                    if (bullets[i].y + 30 > enemys3[j].y && bullets[i].y + 30 < enemys3[j].y + 80 ||
+                        enemys3[j].y < bullets[i].y && bullets[i].y < enemys3[j].y + 80) {
                         bullets[i].status = false;
                         enemys3[j].status = false;
                         cuDa.point++;
@@ -224,10 +223,10 @@ function checkCollision4() {
     for (let i = 0; i < bullets.length; i++) {
         for (let j = 0; j < enemys4.length; j++) {
             if (bullets[i].status === true && enemys4[j].status === true) {
-                if (bullets[i].x + 30 > enemys4[j].x && bullets[i].x + 30 < enemys4[j].x + 50 ||
-                    enemys4[j].x < bullets[i].x && bullets[i].x < enemys4[j].x + 50) {
-                    if (bullets[i].y + 30 > enemys4[j].y && bullets[i].y + 30 < enemys4[j].y + 50 ||
-                        enemys4[j].y < bullets[i].y && bullets[i].y < enemys4[j].y + 40) {
+                if (bullets[i].x + 30 > enemys4[j].x && bullets[i].x + 30 < enemys4[j].x + 100 ||
+                    enemys4[j].x < bullets[i].x && bullets[i].x < enemys4[j].x + 100) {
+                    if (bullets[i].y + 30 > enemys4[j].y && bullets[i].y + 30 < enemys4[j].y + 80 ||
+                        enemys4[j].y < bullets[i].y && bullets[i].y < enemys4[j].y + 80) {
                         bullets[i].status = false;
                         enemys4[j].status = false;
                         cuDa.point++;
@@ -241,10 +240,10 @@ function checkCollision4() {
 function playerCollisionEnemy1() {
     for (let j = 0; j < enemys1.length; j++) {
         if (enemys1[j].status === true) {
-            if (cuDa.x + 50 > enemys1[j].x && cuDa.x + 50 < enemys1[j].x + 50 ||
-                enemys1[j].x < cuDa.x && cuDa.x < enemys1[j].x + 50) {
-                if (cuDa.y + 60 > enemys1[j].y && cuDa.y + 60 < enemys1[j].y + 50 ||
-                    enemys1[j].y < cuDa.y && cuDa.y < enemys1[j].y + 40) {
+            if (cuDa.x + 180 > enemys1[j].x && cuDa.x + 180 < enemys1[j].x + 100 ||
+                enemys1[j].x < cuDa.x && cuDa.x < enemys1[j].x + 100) {
+                if (cuDa.y + 160 > enemys1[j].y && cuDa.y + 160 < enemys1[j].y + 80 ||
+                    enemys1[j].y < cuDa.y && cuDa.y < enemys1[j].y + 80) {
                     enemys1[j].status = false;
                     cuDa.Hp--;
                 }
@@ -255,10 +254,10 @@ function playerCollisionEnemy1() {
 function playerCollisionEnemy2() {
     for (let j = 0; j < enemys2.length; j++) {
         if (enemys2[j].status === true) {
-            if (cuDa.x + 50 > enemys2[j].x && cuDa.x + 50 < enemys2[j].x + 50 ||
-                enemys2[j].x < cuDa.x && cuDa.x < enemys2[j].x + 50) {
-                if (cuDa.y + 60 > enemys2[j].y && cuDa.y + 60 < enemys2[j].y + 50 ||
-                    enemys2[j].y < cuDa.y && cuDa.y < enemys2[j].y + 40) {
+            if (cuDa.x + 180 > enemys2[j].x && cuDa.x + 180 < enemys2[j].x + 100 ||
+                enemys2[j].x < cuDa.x && cuDa.x < enemys2[j].x + 100) {
+                if (cuDa.y + 160 > enemys2[j].y && cuDa.y + 160 < enemys2[j].y + 80 ||
+                    enemys2[j].y < cuDa.y && cuDa.y < enemys2[j].y + 80) {
                     enemys2[j].status = false;
                     cuDa.Hp--;
                 }
@@ -269,10 +268,10 @@ function playerCollisionEnemy2() {
 function playerCollisionEnemy3() {
     for (let j = 0; j < enemys3.length; j++) {
         if (enemys3[j].status === true) {
-            if (cuDa.x + 50 > enemys3[j].x && cuDa.x + 50 < enemys3[j].x + 50 ||
-                enemys3[j].x < cuDa.x && cuDa.x < enemys3[j].x + 50) {
-                if (cuDa.y + 60 > enemys3[j].y && cuDa.y + 60 < enemys3[j].y + 50 ||
-                    enemys3[j].y < cuDa.y && cuDa.y < enemys3[j].y + 40) {
+            if (cuDa.x + 180 > enemys3[j].x && cuDa.x + 180 < enemys3[j].x + 100 ||
+                enemys3[j].x < cuDa.x && cuDa.x < enemys3[j].x + 100) {
+                if (cuDa.y + 160 > enemys3[j].y && cuDa.y + 160 < enemys3[j].y + 80 ||
+                    enemys3[j].y < cuDa.y && cuDa.y < enemys3[j].y + 80) {
                     enemys3[j].status = false;
                     cuDa.Hp--;
                 }
@@ -283,10 +282,10 @@ function playerCollisionEnemy3() {
 function playerCollisionEnemy4() {
     for (let j = 0; j < enemys4.length; j++) {
         if (enemys4[j].status === true) {
-            if (cuDa.x + 50 > enemys4[j].x && cuDa.x + 50 < enemys4[j].x + 50 ||
-                enemys4[j].x < cuDa.x && cuDa.x < enemys4[j].x + 50) {
-                if (cuDa.y + 60 > enemys4[j].y && cuDa.y + 60 < enemys4[j].y + 50 ||
-                    enemys4[j].y < cuDa.y && cuDa.y < enemys4[j].y + 40) {
+            if (cuDa.x + 180 > enemys4[j].x && cuDa.x + 180 < enemys4[j].x + 100 ||
+                enemys4[j].x < cuDa.x && cuDa.x < enemys4[j].x + 100) {
+                if (cuDa.y + 160 > enemys4[j].y && cuDa.y + 160 < enemys4[j].y + 80 ||
+                    enemys4[j].y < cuDa.y && cuDa.y < enemys4[j].y + 80) {
                     enemys4[j].status = false;
                     cuDa.Hp--;
                 }
@@ -298,10 +297,10 @@ function playerCollisionEnemy4() {
 function playerCollisionBulletBoss() {
     for (let j = 0; j < bullesBosss.length; j++) {
         if (bullesBosss[j].status === true) {
-            if (bullesBosss[j].x + 20 > cuDa.x && bullesBosss[j].x + 20 < cuDa.x + 50 ||
-                bullesBosss[j].x > cuDa.x && bullesBosss[j].x < cuDa.x + 50) {
-                if (bullesBosss[j].y + 40 > cuDa.y && bullesBosss[j].y + 40 < cuDa.y + 60 ||
-                    cuDa.y < bullesBosss[j].y && bullesBosss[j].y < cuDa.y + 60) {
+            if (bullesBosss[j].x + 30 > cuDa.x && bullesBosss[j].x + 30 < cuDa.x + 180 ||
+                bullesBosss[j].x > cuDa.x && bullesBosss[j].x < cuDa.x + 180) {
+                if (bullesBosss[j].y + 60 > cuDa.y && bullesBosss[j].y + 60 < cuDa.y + 160 ||
+                    cuDa.y < bullesBosss[j].y && bullesBosss[j].y < cuDa.y + 160) {
                     bullesBosss[j].status = false;
                     cuDa.Hp--;
                 }
@@ -312,12 +311,13 @@ function playerCollisionBulletBoss() {
 function bossCollisionBullet (){
     for (let j = 0; j < bullets.length; j++) {
         if (bullets[j].status === true) {
-            if (bullets[j].x + 20 > boss.x && bullets[j].x + 20 < boss.x + 50 ||
-                bullets[j].x > boss.x && bullets[j].x < boss.x + 50) {
-                if (bullets[j].y + 40 > boss.y && bullets[j].y + 40 < boss.y + 60 ||
-                    boss.y < bullets[j].y && bullets[j].y < boss.y + 60) {
+            if (bullets[j].x + 30 > boss.x && bullets[j].x + 30 < boss.x + 200 ||
+                bullets[j].x > boss.x && bullets[j].x < boss.x + 200) {
+                if (bullets[j].y + 60 > boss.y && bullets[j].y + 60 < boss.y + 300 ||
+                    boss.y < bullets[j].y && bullets[j].y < boss.y + 300) {
                     bullets[j].status = false;
                     boss.HpBoss--;
+                    cuDa.point++;
                 }
             }
         }
@@ -339,7 +339,7 @@ function endGame() {
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 let boss = new Boss(250, 20);
-let cuDa = new Player(400, 300, 50, 60, 4, 'anh/cudapro.jpg');
+let cuDa = new Player(600, 400, 180, 160, 4, 'anh/cudaUp.jpg');
 cuDa.draw(ctx)
 let angle = 0;
 let bullets = [];
@@ -349,11 +349,11 @@ let enemys3 = [];
 let enemys4 = [];
 let bullesBosss = [];
 play();
-setInterval(createEnemy1, 5000);
-setInterval(createEnemy2, 4000);
-setInterval(createEnemy3, 6000);
-setInterval(createEnemy4, 7000);
-setInterval(createBulletBoss, 800);
+setInterval(createEnemy1, 1000);
+setInterval(createEnemy2, 1500);
+setInterval(createEnemy3, 2500);
+setInterval(createEnemy4, 2000);
+setInterval(createBulletBoss, 1800);
 canvas.onmousemove = canvasMouseMove;
 canvas.onmousedown = canvasMouseDown;
 

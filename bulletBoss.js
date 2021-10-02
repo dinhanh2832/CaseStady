@@ -14,7 +14,7 @@ class BulletBoss {
             let y = this.y;
             let img = new Image();
             img.onload = function () {
-                ctx.drawImage(img,x,y,20,40)
+                ctx.drawImage(img,x,y,30,60)
             }
             img.src = "anh/danboss.jpg";
             ctx.fill();

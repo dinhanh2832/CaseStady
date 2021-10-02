@@ -11,8 +11,8 @@ class Player {
         this.angle = 0;
     }
     rotate(mouseX, mouseY) {
-        let dx = mouseX - this.x;
-        let dy = mouseY - this.y;
+        let dx = (mouseX - 80) - this.x;
+        let dy = (mouseY - 60) - this.y;
         this.angle = Math.atan2(dy, dx);
     }
     moveLeft(){
@@ -35,7 +35,7 @@ class Player {
         let img = new Image();
         ctx.beginPath();
         img.onload = function (){
-            ctx.clearRect(0,0,600,500)
+            ctx.clearRect(0,0,1200,700)
             ctx.drawImage(img,a,b,c,d);
         }
         img.src = this.image;
@@ -45,7 +45,7 @@ class Player {
     fire(){
         let dirX = Math.cos(this.angle);
         let dirY = Math.sin(this.angle);
-        let bullet1 = new Bullet(this.x,this.y,dirX,dirY);
+        let bullet1 = new Bullet((this.x + 80),(this.y + 60),dirX,dirY);
         bullets.push(bullet1)
     }
 }
