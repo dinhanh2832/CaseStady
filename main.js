@@ -371,8 +371,8 @@ let enemys2 = [];
 let enemys3 = [];
 let enemys4 = [];
 let bullesBosss = [];
-let soundFire = new Audio("sound/ban.mp3")
-let explode = new Audio("sound/no.mp3")
+let soundFire = new Audio("sound/ban.Mp3")
+let explode = new Audio("sound/no.Mp3")
 play();
 setInterval(createEnemy1, 1000);
 setInterval(createEnemy2, 1500);
