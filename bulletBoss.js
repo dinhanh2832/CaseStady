@@ -3,13 +3,13 @@ class BulletBoss {
         this.x = x;
         this.y = y;
         this.speed = 2;
-        this.status = true;
+        this.status = 1;
     }
     move(){
         this.y += this.speed;
     }
     drawBulletBoss(){
-        if(this.status){
+        if(this.status === 1){
             let x = this.x;
             let y = this.y;
             let img = new Image();

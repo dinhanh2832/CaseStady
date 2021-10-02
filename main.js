@@ -95,7 +95,6 @@ function createEnemy1() {
     let enemy1 = new Enemy(ene1X, ene1Y, dirX, dirY, "anh/anhbanhDown.jpg");
     enemys1.push(enemy1);
 }
-
 function createEnemy2() {
     let ene2X = 0;
     let ene2Y = Math.floor(Math.random() * 590);
@@ -105,7 +104,6 @@ function createEnemy2() {
     let enemy2 = new Enemy(ene2X, ene2Y, dirX, dirY, "anh/anhbanhRight.jpg");
     enemys2.push(enemy2);
 }
-
 function createEnemy3() {
     let ene3X = 1080;
     let ene3Y = Math.floor(Math.random() * 630);
@@ -115,7 +113,6 @@ function createEnemy3() {
     let enemy3 = new Enemy(ene3X, ene3Y, dirX, dirY, "anh/anhbanhLeft.jpg");
     enemys3.push(enemy3);
 }
-
 function createEnemy4() {
     let ene4X = Math.floor(Math.random() * 1080);
     let ene4Y = 630;
@@ -137,7 +134,6 @@ function canvasMouseMove(pos) {
     let y = pos.pageY - canvas.offsetTop;
     cuDa.rotate(x, y);
 }
-
 function canvasMouseDown() {
     cuDa.fire();
     soundFire.play();
@@ -184,7 +180,6 @@ function checkCollision1() {
         }
     }
 }
-
 function checkCollision2() {
     for (let i = 0; i < bullets.length; i++) {
         for (let j = 0; j < enemys2.length; j++) {
@@ -203,7 +198,6 @@ function checkCollision2() {
         }
     }
 }
-
 function checkCollision3() {
     for (let i = 0; i < bullets.length; i++) {
         for (let j = 0; j < enemys3.length; j++) {
@@ -222,7 +216,6 @@ function checkCollision3() {
         }
     }
 }
-
 function checkCollision4() {
     for (let i = 0; i < bullets.length; i++) {
         for (let j = 0; j < enemys4.length; j++) {
@@ -256,7 +249,6 @@ function playerCollisionEnemy1() {
         }
     }
 }
-
 function playerCollisionEnemy2() {
     for (let j = 0; j < enemys2.length; j++) {
         if (enemys2[j].status === 1) {
@@ -271,7 +263,6 @@ function playerCollisionEnemy2() {
         }
     }
 }
-
 function playerCollisionEnemy3() {
     for (let j = 0; j < enemys3.length; j++) {
         if (enemys3[j].status === 1) {
@@ -286,7 +277,6 @@ function playerCollisionEnemy3() {
         }
     }
 }
-
 function playerCollisionEnemy4() {
     for (let j = 0; j < enemys4.length; j++) {
         if (enemys4[j].status === 1) {
