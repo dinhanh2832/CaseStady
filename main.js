@@ -38,7 +38,7 @@ function docReady() {
 function play() {
     cuDa.draw(ctx);
     for (let i = 0; i < bullets.length; i++) {
-        if(bullets[i].x > 1250 || bullets[i].x < 0 || bullets[i].y > 700 || bullets[i].y <0){
+        if(bullets[i].x > 1200 || bullets[i].x < 0 || bullets[i].y > 700 || bullets[i].y <0){
             bullets.splice(bullets.indexOf(bullets[i]),1)
         }
         bullets[i].move();
@@ -100,7 +100,7 @@ function play() {
 }
 
 function createEnemy1() {
-    let ene1X = Math.floor(Math.random() * 1130);
+    let ene1X = Math.floor(Math.random() * 1080);
     let ene1Y = 0;
     rotate(cuDa.x, cuDa.y, ene1X, ene1Y);
     let dirX = Math.cos(angle);
@@ -120,7 +120,7 @@ function createEnemy2() {
 }
 
 function createEnemy3() {
-    let ene3X = 1130;
+    let ene3X = 1080;
     let ene3Y = Math.floor(Math.random() * 590);
     rotate(cuDa.x, cuDa.y, ene3X, ene3Y);
     let dirX = Math.cos(angle);
@@ -130,7 +130,7 @@ function createEnemy3() {
 }
 
 function createEnemy4() {
-    let ene4X = Math.floor(Math.random() * 1130);
+    let ene4X = Math.floor(Math.random() * 1080);
     let ene4Y = 590;
     rotate(cuDa.x, cuDa.y, ene4X, ene4Y);
     let dirX = Math.cos(angle);

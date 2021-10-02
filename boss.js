@@ -10,7 +10,7 @@ class Boss {
         this.x += this.speed;
     }
     check(){
-        if(this.x < 0 || this.x > 1200){
+        if(this.x < 0 || this.x > 1080){
             this.speed = - this.speed;
         }
     }
