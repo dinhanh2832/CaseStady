@@ -38,7 +38,7 @@ function docReady() {
 function play() {
     cuDa.draw(ctx);
     for (let i = 0; i < bullets.length; i++) {
-        bullets[i].update();
+        bullets[i].move();
         bullets[i].draw(ctx);
     }
     if (cuDa.point < 3) {
@@ -142,7 +142,7 @@ function rotate(playerX, playerY, enemyX, enemyY) {
 function canvasMouseMove(pos) {
     let x = pos.pageX - canvas.offsetLeft;
     let y = pos.pageY - canvas.offsetTop;
-    cuDa.rotateCannon(x,y);
+    cuDa.rotate(x,y);
 }
 function canvasMouseDown() {
     cuDa.fire();
@@ -324,13 +324,18 @@ function bossCollisionBullet (){
     }
 }
 
-// function endGame() {
-//     if(cuDa.Hp === 0){
-//         alert('Điểm số của bạn là: ' + cuDa.point);
-//         cuDa.Hp = 2;
-//         location.reload();
-//     }
-// }
+function endGame() {
+    if(cuDa.Hp === 0){
+        alert('Điểm số của bạn là: ' + cuDa.point);
+        cuDa.Hp = 2;
+        location.reload();
+    }
+    if(boss.HpBoss === 0){
+        alert('Ôi bạn đỉnh vô cùng luôn');
+        boss.HpBoss = 100;
+        location.reload()
+    }
+}
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 let boss = new Boss(250, 20);

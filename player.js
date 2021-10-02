@@ -7,10 +7,10 @@ class Player {
         this.speed = speed;
         this.image = img;
         this.point = 0;
-        this.Hp = 2;
+        this.Hp = 15;
         this.angle = 0;
     }
-    rotateCannon(mouseX, mouseY) {
+    rotate(mouseX, mouseY) {
         let dx = mouseX - this.x;
         let dy = mouseY - this.y;
         this.angle = Math.atan2(dy, dx);
