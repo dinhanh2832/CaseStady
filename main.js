@@ -28,9 +28,6 @@ function movePlayer(evt) {
                 cuDa.moveDown();
             }
             break;
-        case 32:
-            cuDa.fire();
-            break;
     }
 }
 
@@ -41,7 +38,7 @@ function docReady() {
 function play() {
     cuDa.draw(ctx);
     for (let i = 0; i < bullets.length; i++) {
-        bullets[i].move();
+        bullets[i].update();
         bullets[i].draw(ctx);
     }
     if (cuDa.point < 3) {
@@ -95,6 +92,7 @@ function play() {
     playerCollisionEnemy3();
     playerCollisionEnemy4();
     drawHp();
+    drawHpBoss();
     requestAnimationFrame(play)
 }
 
@@ -139,6 +137,15 @@ function rotate(playerX, playerY, enemyX, enemyY) {
     let dx = playerX - enemyX;
     let dy = playerY - enemyY;
     return angle = Math.atan2(dy, dx);
+}
+
+function canvasMouseMove(pos) {
+    let x = pos.pageX - canvas.offsetLeft;
+    let y = pos.pageY - canvas.offsetTop;
+    cuDa.rotateCannon(x,y);
+}
+function canvasMouseDown() {
+    cuDa.fire();
 }
 
 function createBulletBoss() {
@@ -324,9 +331,10 @@ function bossCollisionBullet (){
 //         location.reload();
 //     }
 // }
-let ctx = document.getElementById('canvas').getContext('2d');
+let canvas = document.getElementById('canvas');
+let ctx = canvas.getContext('2d');
 let boss = new Boss(250, 20);
-let cuDa = new Player(400, 300, 50, 60, 4, 'anh/cudapro.jpg', 38);
+let cuDa = new Player(400, 300, 50, 60, 4, 'anh/cudapro.jpg');
 cuDa.draw(ctx)
 let angle = 0;
 let bullets = [];
@@ -341,6 +349,9 @@ setInterval(createEnemy2, 4000);
 setInterval(createEnemy3, 6000);
 setInterval(createEnemy4, 7000);
 setInterval(createBulletBoss, 800);
+canvas.onmousemove = canvasMouseMove;
+canvas.onmousedown = canvasMouseDown;
+
 
 
 

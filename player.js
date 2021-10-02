@@ -1,26 +1,31 @@
 class Player {
-    constructor(x,y,width,height,speed,img,direction) {
+    constructor(x,y,width,height,speed,img) {
         this.height = height;
         this.width = width;
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.image = img;
-        this.direction = direction;
         this.point = 0;
         this.Hp = 2;
+        this.angle = 0;
     }
-    moveUp(){
-        this.y -= this.speed
-    }
-    moveDown(){
-        this.y += this.speed
+    rotateCannon(mouseX, mouseY) {
+        let dx = mouseX - this.x;
+        let dy = mouseY - this.y;
+        this.angle = Math.atan2(dy, dx);
     }
     moveLeft(){
         this.x -= this.speed
     }
     moveRight(){
-        this.x += this.speed
+        this.x += this.speed;
+    }
+    moveUp(){
+        this.y -= this.speed;
+    }
+    moveDown(){
+        this.y += this.speed;
     }
     draw(ctx){
         let a = this.x;
@@ -38,7 +43,9 @@ class Player {
         ctx.closePath();
     }
     fire(){
-        let bullet1 = new Bullet(this.x,this.y,this.direction);
+        let dirX = Math.cos(this.angle);
+        let dirY = Math.sin(this.angle);
+        let bullet1 = new Bullet(this.x,this.y,dirX,dirY);
         bullets.push(bullet1)
     }
 }

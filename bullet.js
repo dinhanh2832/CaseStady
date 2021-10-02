@@ -1,29 +1,18 @@
 class Bullet {
-    constructor(x, y, direction) {
+    constructor(x, y, directionX,directionY) {
         this.x = x;
         this.y = y;
-        this.direction = direction;
-        this.speed = 4;
+        this.power = 3;
         this.status = true;
         this.images = ["anh/dan1.jpg", "anh/dan2.ipg", "anh/dan3.jpg", "anh/dan4.jpg"]
         this.currentImage = 1;
         this.count = 1;
-        this.angle = 0;
+        this.speedX = directionX*this.power;
+        this.speedY = directionY*this.power;
     }
-    moveUp() {
-        this.y -= this.speed;
-    }
-
-    moveDown() {
-        this.y += this.speed;
-    }
-
-    moveLeft() {
-        this.x -= this.speed;
-    }
-
-    moveRight() {
-        this.x += this.speed
+    update(){
+        this.x += this.speedX;
+        this.y += this.speedY;
     }
 
     draw(ctx) {
@@ -39,87 +28,5 @@ class Bullet {
         }
         ctx.fill();
         ctx.closePath();
-    }
-
-
-    move() {
-        switch (this.direction) {
-            case 38:
-                if(this.count%10 === 0 ){
-                if (this.currentImage === 1) {
-                    this.currentImage = 2;
-                } else {
-                    if (this.currentImage === 2) {
-                        this.currentImage = 3;
-                    } else {
-                        if (this.currentImage === 3) {
-                            this.currentImage = 4;
-                        } else {
-                            this.currentImage = 1;
-                        }
-                    }
-                }
-            }
-                this.moveUp();
-                this.count ++;
-                break;
-            case 37:
-                if(this.count%10 === 0 ){
-                    if (this.currentImage === 1) {
-                        this.currentImage = 2;
-                    } else {
-                        if (this.currentImage === 2) {
-                            this.currentImage = 3;
-                        } else {
-                            if (this.currentImage === 3) {
-                                this.currentImage = 4;
-                            } else {
-                                this.currentImage = 1;
-                            }
-                        }
-                    }
-                }
-                this.moveLeft();
-                this.count ++;
-                break;
-            case 39:
-                if(this.count%10 === 0 ){
-                    if (this.currentImage === 1) {
-                        this.currentImage = 2;
-                    } else {
-                        if (this.currentImage === 2) {
-                            this.currentImage = 3;
-                        } else {
-                            if (this.currentImage === 3) {
-                                this.currentImage = 4;
-                            } else {
-                                this.currentImage = 1;
-                            }
-                        }
-                    }
-                }
-                this.moveRight();
-                this.count ++;
-                break;
-            case 40:
-                if(this.count%10 === 0 ){
-                    if (this.currentImage === 1) {
-                        this.currentImage = 2;
-                    } else {
-                        if (this.currentImage === 2) {
-                            this.currentImage = 3;
-                        } else {
-                            if (this.currentImage === 3) {
-                                this.currentImage = 4;
-                            } else {
-                                this.currentImage = 1;
-                            }
-                        }
-                    }
-                }
-                this.moveDown();
-                this.count ++;
-                break;
-        }
     }
 }
