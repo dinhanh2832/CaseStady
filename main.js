@@ -38,7 +38,7 @@ function docReady() {
 function play() {
     cuDa.draw(ctx);
     for (let i = 0; i < bullets.length; i++) {
-        if(bullets[i].x > 1200 || bullets[i].x < 0 || bullets[i].y > 700 || bullets[i].y <0){
+        if(bullets[i].x > 1300 || bullets[i].x < 0 || bullets[i].y > 800 || bullets[i].y < 0){
             bullets.splice(bullets.indexOf(bullets[i]),1)
         }
         bullets[i].move();
@@ -87,6 +87,7 @@ function play() {
             bullesBosss[i].drawBulletBoss();
         }
         drawHpBoss();
+        drawHp();
         playerCollisionBulletBoss();
         bossCollisionBullet();
     }
@@ -121,7 +122,7 @@ function createEnemy2() {
 
 function createEnemy3() {
     let ene3X = 1080;
-    let ene3Y = Math.floor(Math.random() * 590);
+    let ene3Y = Math.floor(Math.random() * 630);
     rotate(cuDa.x, cuDa.y, ene3X, ene3Y);
     let dirX = Math.cos(angle);
     let dirY = Math.sin(angle);
@@ -131,7 +132,7 @@ function createEnemy3() {
 
 function createEnemy4() {
     let ene4X = Math.floor(Math.random() * 1080);
-    let ene4Y = 590;
+    let ene4Y = 630;
     rotate(cuDa.x, cuDa.y, ene4X, ene4Y);
     let dirX = Math.cos(angle);
     let dirY = Math.sin(angle);
@@ -335,8 +336,8 @@ function bossCollisionBullet() {
         if (bullets[j].status === 1) {
             if (bullets[j].x + 30 > boss.x && bullets[j].x + 30 < boss.x + 200 ||
                 bullets[j].x > boss.x && bullets[j].x < boss.x + 200) {
-                if (bullets[j].y + 60 > boss.y && bullets[j].y + 60 < boss.y + 300 ||
-                    boss.y < bullets[j].y && bullets[j].y < boss.y + 300) {
+                if (bullets[j].y + 60 > boss.y && bullets[j].y + 60 < boss.y + 200 ||
+                    boss.y < bullets[j].y && bullets[j].y < boss.y + 200) {
                     bullets[j].status = 2;
                     boss.HpBoss--;
                     cuDa.point++;

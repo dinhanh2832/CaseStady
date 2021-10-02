@@ -11,7 +11,7 @@ class Player {
         this.angle = 0;
     }
     rotate(mouseX, mouseY) {
-        let dx = (mouseX - 80) - this.x;
+        let dx = (mouseX - 60) - this.x;
         let dy = (mouseY - 60) - this.y;
         this.angle = Math.atan2(dy, dx);
     }
@@ -45,7 +45,7 @@ class Player {
     fire(){
         let dirX = Math.cos(this.angle);
         let dirY = Math.sin(this.angle);
-        let bullet1 = new Bullet((this.x + 80),(this.y + 60),dirX,dirY);
+        let bullet1 = new Bullet((this.x + 60),(this.y + 60),dirX,dirY);
         bullets.push(bullet1)
     }
 }
