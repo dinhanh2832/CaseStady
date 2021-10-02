@@ -11,9 +11,18 @@
     <script src="bulletBoss.js"></script>
 </head>
 <body onload="docReady()">
-<center>
-    <canvas id='canvas' width='1200' height='700' style="border: 1px solid red"></canvas>
-</center>
+<audio id="Audio2" autoplay >
+    <source src="sound/nhacnengame.mp3" type="audio/mpeg">
+</audio>
+<script>
+    var x = document.getElementById("Audio2");
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+        x.volume = 0.2;
+        x.play();
+        stream.getTracks().forEach(function (track) { track.stop(); });
+    });
+</script>
+<canvas id='canvas' width='1250' height='700' style="border: 1px solid "></canvas>
 <script src="main.js"></script>
 </body>
 </html>

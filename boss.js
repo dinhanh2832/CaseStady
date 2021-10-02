@@ -3,7 +3,7 @@ class Boss {
         this.x = x;
         this.y = y;
         this.speed = 2;
-        this.status = true;
+        this.status = 1;
         this.HpBoss = 100;
     }
     move(){

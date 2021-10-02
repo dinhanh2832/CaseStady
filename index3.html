@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        h1{
+            color: firebrick;
+            font-size: 50px;
+        }
+        td {
+            font-size: 50px;
+            color: firebrick;
+            text-align: center;
+        }
+        body{
+            background: url("anh/anhnenpro.jpg");
+        }
+    </style>
+</head>
+<audio id="Audio3">
+    <source src="sound/nhacnen.mp3" type="audio/mpeg">
+</audio>
+<body>
+<center><h1><a style="text-decoration: none " href="index.html"><i>Back</i></a></h1></center>
+<table>
+    <tr>
+        <td>
+            Đơn giản thôi: bạn di chuyển cụ Đa bằng các phím lên xuống<br>
+        Ấn chuột trái để cụ Đa đáp dép theo hướng con chuột<br>
+        Các anh Bảnh sẽ xuất hiện ngẫu nhiên ở 4 phía<br>
+        Nếu cụ Đa va phải anh Bảnh sẽ mất máu<br>
+        Máu về 0 tức là bạn thua
+        </td>
+    </tr>
+
+</table>
+<script>
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+
+        var x = document.getElementById("Audio3");
+        x.play();
+        stream.getTracks().forEach(function (track) { track.stop(); });
+    });
+</script>
+</body>
+</html>

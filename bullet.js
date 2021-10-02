@@ -3,7 +3,7 @@ class Bullet {
         this.x = x;
         this.y = y;
         this.power = 4;
-        this.status = true;
+        this.status = 1;
         this.images = ["anh/dan1.jpg", "anh/dan2.ipg", "anh/dan3.jpg", "anh/dan4.jpg"]
         this.currentImage = 1;
         this.count = 1;
@@ -18,7 +18,7 @@ class Bullet {
     }
 
     draw(ctx) {
-        if (this.status) {
+        if (this.status === 1) {
             let c = this.width;
             let d = this.height;
             let x = this.x;

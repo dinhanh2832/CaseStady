@@ -38,10 +38,13 @@ function docReady() {
 function play() {
     cuDa.draw(ctx);
     for (let i = 0; i < bullets.length; i++) {
+        if(bullets[i].x > 1250 || bullets[i].x < 0 || bullets[i].y > 700 || bullets[i].y <0){
+            bullets.splice(bullets.indexOf(bullets[i]),1)
+        }
         bullets[i].move();
         bullets[i].draw(ctx);
     }
-    if (cuDa.point < 200) {
+    if (cuDa.point < 100) {
         for (let i = 0; i < enemys1.length; i++) {
             enemys1[i].update();
             if (enemys1[i].y > 460) {
@@ -74,6 +77,7 @@ function play() {
             checkCollision4();
             enemys4[i].drawEnemy(ctx);
         }
+        drawHp();
     } else {
         boss.move();
         boss.check();
@@ -82,53 +86,56 @@ function play() {
             bullesBosss[i].move();
             bullesBosss[i].drawBulletBoss();
         }
+        drawHpBoss();
         playerCollisionBulletBoss();
         bossCollisionBullet();
     }
     drawPoint();
-    //endGame()
+    endGame()
     playerCollisionEnemy1();
     playerCollisionEnemy2();
     playerCollisionEnemy3();
     playerCollisionEnemy4();
-    drawHp();
-    drawHpBoss();
     requestAnimationFrame(play)
 }
+
 function createEnemy1() {
-    let ene1X = Math.floor(Math.random() * 1080);
+    let ene1X = Math.floor(Math.random() * 1130);
     let ene1Y = 0;
     rotate(cuDa.x, cuDa.y, ene1X, ene1Y);
     let dirX = Math.cos(angle);
     let dirY = Math.sin(angle);
-    let enemy1 = new Enemy(ene1X, ene1Y, dirX, dirY,"anh/anhbanhUp.jpg");
+    let enemy1 = new Enemy(ene1X, ene1Y, dirX, dirY, "anh/anhbanhDown.jpg");
     enemys1.push(enemy1);
 }
+
 function createEnemy2() {
     let ene2X = 0;
     let ene2Y = Math.floor(Math.random() * 590);
     rotate(cuDa.x, cuDa.y, ene2X, ene2Y);
     let dirX = Math.cos(angle);
     let dirY = Math.sin(angle);
-    let enemy2 = new Enemy(ene2X, ene2Y, dirX, dirY,"anh/anhbanhRight.jpg");
+    let enemy2 = new Enemy(ene2X, ene2Y, dirX, dirY, "anh/anhbanhRight.jpg");
     enemys2.push(enemy2);
 }
+
 function createEnemy3() {
-    let ene3X = 1080;
+    let ene3X = 1130;
     let ene3Y = Math.floor(Math.random() * 590);
     rotate(cuDa.x, cuDa.y, ene3X, ene3Y);
     let dirX = Math.cos(angle);
     let dirY = Math.sin(angle);
-    let enemy3 = new Enemy(ene3X, ene3Y, dirX, dirY,"anh/anhbanhLeft.jpg");
+    let enemy3 = new Enemy(ene3X, ene3Y, dirX, dirY, "anh/anhbanhLeft.jpg");
     enemys3.push(enemy3);
 }
+
 function createEnemy4() {
-    let ene4X = Math.floor(Math.random() * 1080);
+    let ene4X = Math.floor(Math.random() * 1130);
     let ene4Y = 590;
     rotate(cuDa.x, cuDa.y, ene4X, ene4Y);
     let dirX = Math.cos(angle);
     let dirY = Math.sin(angle);
-    let enemy4 = new Enemy(ene4X, ene4Y, dirX, dirY,"anh/anhbanhDown.jpg");
+    let enemy4 = new Enemy(ene4X, ene4Y, dirX, dirY, "anh/anhbanhUp.jpg");
     enemys4.push(enemy4);
 }
 
@@ -141,10 +148,12 @@ function rotate(playerX, playerY, enemyX, enemyY) {
 function canvasMouseMove(pos) {
     let x = pos.pageX - canvas.offsetLeft;
     let y = pos.pageY - canvas.offsetTop;
-    cuDa.rotate(x,y);
+    cuDa.rotate(x, y);
 }
+
 function canvasMouseDown() {
     cuDa.fire();
+    soundFire.play();
 }
 
 function createBulletBoss() {
@@ -155,13 +164,15 @@ function createBulletBoss() {
 function drawPoint() {
     ctx.font = "25px Arial";
     ctx.fillStyle = "blue";
-    ctx.fillText('Poin: ' + cuDa.point, 8, 40)
+    ctx.fillText('Poin: ' + cuDa.point + '/100', 8, 40)
 }
+
 function drawHp() {
     ctx.font = "25px Arial";
     ctx.fillStyle = "red";
     ctx.fillText('Hp: ' + cuDa.Hp, 500, 40)
 }
+
 function drawHpBoss() {
     ctx.font = "25px Arial";
     ctx.fillStyle = "red";
@@ -171,13 +182,14 @@ function drawHpBoss() {
 function checkCollision1() {
     for (let i = 0; i < bullets.length; i++) {
         for (let j = 0; j < enemys1.length; j++) {
-            if (bullets[i].status === true && enemys1[j].status === true) {
+            if (bullets[i].status === 1 && enemys1[j].status === 1) {
                 if (bullets[i].x + 30 > enemys1[j].x && bullets[i].x + 30 < enemys1[j].x + 100 ||
                     enemys1[j].x < bullets[i].x && bullets[i].x < enemys1[j].x + 100) {
                     if (bullets[i].y + 30 > enemys1[j].y && bullets[i].y + 30 < enemys1[j].y + 80 ||
                         enemys1[j].y < bullets[i].y && bullets[i].y < enemys1[j].y + 80) {
-                        bullets[i].status = false;
-                        enemys1[j].status = false;
+                        bullets[i].status = 2;
+                        enemys1[j].status = 2;
+                        explode.play();
                         cuDa.point++;
                     }
                 }
@@ -185,16 +197,18 @@ function checkCollision1() {
         }
     }
 }
+
 function checkCollision2() {
     for (let i = 0; i < bullets.length; i++) {
         for (let j = 0; j < enemys2.length; j++) {
-            if (bullets[i].status === true && enemys2[j].status === true) {
+            if (bullets[i].status === 1 && enemys2[j].status === 1) {
                 if (bullets[i].x + 30 > enemys2[j].x && bullets[i].x + 30 < enemys2[j].x + 100 ||
                     enemys2[j].x < bullets[i].x && bullets[i].x < enemys2[j].x + 100) {
                     if (bullets[i].y + 30 > enemys2[j].y && bullets[i].y + 30 < enemys2[j].y + 80 ||
                         enemys2[j].y < bullets[i].y && bullets[i].y < enemys2[j].y + 80) {
-                        bullets[i].status = false;
-                        enemys2[j].status = false;
+                        bullets[i].status = 2;
+                        enemys2[j].status = 2;
+                        explode.play();
                         cuDa.point++;
                     }
                 }
@@ -202,16 +216,18 @@ function checkCollision2() {
         }
     }
 }
+
 function checkCollision3() {
     for (let i = 0; i < bullets.length; i++) {
         for (let j = 0; j < enemys3.length; j++) {
-            if (bullets[i].status === true && enemys3[j].status === true) {
+            if (bullets[i].status === 1 && enemys3[j].status === 1) {
                 if (bullets[i].x + 30 > enemys3[j].x && bullets[i].x + 30 < enemys3[j].x + 100 ||
                     enemys3[j].x < bullets[i].x && bullets[i].x < enemys3[j].x + 100) {
                     if (bullets[i].y + 30 > enemys3[j].y && bullets[i].y + 30 < enemys3[j].y + 80 ||
                         enemys3[j].y < bullets[i].y && bullets[i].y < enemys3[j].y + 80) {
-                        bullets[i].status = false;
-                        enemys3[j].status = false;
+                        bullets[i].status = 2;
+                        enemys3[j].status = 2;
+                        explode.play();
                         cuDa.point++;
                     }
                 }
@@ -219,16 +235,18 @@ function checkCollision3() {
         }
     }
 }
+
 function checkCollision4() {
     for (let i = 0; i < bullets.length; i++) {
         for (let j = 0; j < enemys4.length; j++) {
-            if (bullets[i].status === true && enemys4[j].status === true) {
+            if (bullets[i].status === 1 && enemys4[j].status === 1) {
                 if (bullets[i].x + 30 > enemys4[j].x && bullets[i].x + 30 < enemys4[j].x + 100 ||
                     enemys4[j].x < bullets[i].x && bullets[i].x < enemys4[j].x + 100) {
                     if (bullets[i].y + 30 > enemys4[j].y && bullets[i].y + 30 < enemys4[j].y + 80 ||
                         enemys4[j].y < bullets[i].y && bullets[i].y < enemys4[j].y + 80) {
-                        bullets[i].status = false;
-                        enemys4[j].status = false;
+                        bullets[i].status = 2;
+                        enemys4[j].status = 2;
+                        explode.play();
                         cuDa.point++;
                     }
                 }
@@ -239,54 +257,57 @@ function checkCollision4() {
 
 function playerCollisionEnemy1() {
     for (let j = 0; j < enemys1.length; j++) {
-        if (enemys1[j].status === true) {
+        if (enemys1[j].status === 1) {
             if (cuDa.x + 180 > enemys1[j].x && cuDa.x + 180 < enemys1[j].x + 100 ||
                 enemys1[j].x < cuDa.x && cuDa.x < enemys1[j].x + 100) {
                 if (cuDa.y + 160 > enemys1[j].y && cuDa.y + 160 < enemys1[j].y + 80 ||
                     enemys1[j].y < cuDa.y && cuDa.y < enemys1[j].y + 80) {
-                    enemys1[j].status = false;
+                    enemys1[j].status = 2;
                     cuDa.Hp--;
                 }
             }
         }
     }
 }
+
 function playerCollisionEnemy2() {
     for (let j = 0; j < enemys2.length; j++) {
-        if (enemys2[j].status === true) {
+        if (enemys2[j].status === 1) {
             if (cuDa.x + 180 > enemys2[j].x && cuDa.x + 180 < enemys2[j].x + 100 ||
                 enemys2[j].x < cuDa.x && cuDa.x < enemys2[j].x + 100) {
                 if (cuDa.y + 160 > enemys2[j].y && cuDa.y + 160 < enemys2[j].y + 80 ||
                     enemys2[j].y < cuDa.y && cuDa.y < enemys2[j].y + 80) {
-                    enemys2[j].status = false;
+                    enemys2[j].status = 2;
                     cuDa.Hp--;
                 }
             }
         }
     }
 }
+
 function playerCollisionEnemy3() {
     for (let j = 0; j < enemys3.length; j++) {
-        if (enemys3[j].status === true) {
+        if (enemys3[j].status === 1) {
             if (cuDa.x + 180 > enemys3[j].x && cuDa.x + 180 < enemys3[j].x + 100 ||
                 enemys3[j].x < cuDa.x && cuDa.x < enemys3[j].x + 100) {
                 if (cuDa.y + 160 > enemys3[j].y && cuDa.y + 160 < enemys3[j].y + 80 ||
                     enemys3[j].y < cuDa.y && cuDa.y < enemys3[j].y + 80) {
-                    enemys3[j].status = false;
+                    enemys3[j].status = 2;
                     cuDa.Hp--;
                 }
             }
         }
     }
 }
+
 function playerCollisionEnemy4() {
     for (let j = 0; j < enemys4.length; j++) {
-        if (enemys4[j].status === true) {
+        if (enemys4[j].status === 1) {
             if (cuDa.x + 180 > enemys4[j].x && cuDa.x + 180 < enemys4[j].x + 100 ||
                 enemys4[j].x < cuDa.x && cuDa.x < enemys4[j].x + 100) {
                 if (cuDa.y + 160 > enemys4[j].y && cuDa.y + 160 < enemys4[j].y + 80 ||
                     enemys4[j].y < cuDa.y && cuDa.y < enemys4[j].y + 80) {
-                    enemys4[j].status = false;
+                    enemys4[j].status = 2;
                     cuDa.Hp--;
                 }
             }
@@ -296,26 +317,27 @@ function playerCollisionEnemy4() {
 
 function playerCollisionBulletBoss() {
     for (let j = 0; j < bullesBosss.length; j++) {
-        if (bullesBosss[j].status === true) {
+        if (bullesBosss[j].status === 1) {
             if (bullesBosss[j].x + 30 > cuDa.x && bullesBosss[j].x + 30 < cuDa.x + 180 ||
                 bullesBosss[j].x > cuDa.x && bullesBosss[j].x < cuDa.x + 180) {
                 if (bullesBosss[j].y + 60 > cuDa.y && bullesBosss[j].y + 60 < cuDa.y + 160 ||
                     cuDa.y < bullesBosss[j].y && bullesBosss[j].y < cuDa.y + 160) {
-                    bullesBosss[j].status = false;
+                    bullesBosss[j].status = 2;
                     cuDa.Hp--;
                 }
             }
         }
     }
 }
-function bossCollisionBullet (){
+
+function bossCollisionBullet() {
     for (let j = 0; j < bullets.length; j++) {
-        if (bullets[j].status === true) {
+        if (bullets[j].status === 1) {
             if (bullets[j].x + 30 > boss.x && bullets[j].x + 30 < boss.x + 200 ||
                 bullets[j].x > boss.x && bullets[j].x < boss.x + 200) {
                 if (bullets[j].y + 60 > boss.y && bullets[j].y + 60 < boss.y + 300 ||
                     boss.y < bullets[j].y && bullets[j].y < boss.y + 300) {
-                    bullets[j].status = false;
+                    bullets[j].status = 2;
                     boss.HpBoss--;
                     cuDa.point++;
                 }
@@ -325,17 +347,18 @@ function bossCollisionBullet (){
 }
 
 function endGame() {
-    if(cuDa.Hp === 0){
+    if (cuDa.Hp === 0) {
         alert('Điểm số của bạn là: ' + cuDa.point);
-        cuDa.Hp = 2;
-        location.reload();
+        cuDa.Hp = 15
+        location.replace("index.html");
     }
-    if(boss.HpBoss === 0){
-        alert('Ôi bạn đỉnh vô cùng luôn');
-        boss.HpBoss = 100;
-        location.reload()
+    if (boss.HpBoss === 0) {
+        alert('Điểm số của bạn là: ' + cuDa.point);
+        cuDa.Hp = 15
+        location.replace("index.html");
     }
 }
+
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 let boss = new Boss(250, 20);
@@ -348,6 +371,8 @@ let enemys2 = [];
 let enemys3 = [];
 let enemys4 = [];
 let bullesBosss = [];
+let soundFire = new Audio("sound/ban.mp3")
+let explode = new Audio("sound/no.mp3")
 play();
 setInterval(createEnemy1, 1000);
 setInterval(createEnemy2, 1500);
