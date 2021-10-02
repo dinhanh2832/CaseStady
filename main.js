@@ -38,42 +38,28 @@ function docReady() {
 function play() {
     cuDa.draw(ctx);
     for (let i = 0; i < bullets.length; i++) {
-        if(bullets[i].x > 1300 || bullets[i].x < 0 || bullets[i].y > 800 || bullets[i].y < 0){
-            bullets.splice(bullets.indexOf(bullets[i]),1)
-        }
         bullets[i].move();
         bullets[i].draw(ctx);
     }
     if (cuDa.point < 100) {
         for (let i = 0; i < enemys1.length; i++) {
             enemys1[i].update();
-            if (enemys1[i].y > 460) {
-                enemys1.splice(enemys1.indexOf(enemys1[i]), 1)
-            }
             checkCollision1();
             enemys1[i].drawEnemy(ctx);
         }
         for (let i = 0; i < enemys2.length; i++) {
             enemys2[i].update();
-            if (enemys2[i].x > 550) {
-                enemys2.splice(enemys2.indexOf(enemys2[i]), 1)
-            }
             checkCollision2();
             enemys2[i].drawEnemy(ctx);
         }
         for (let i = 0; i < enemys3.length; i++) {
             enemys3[i].update();
-            if (enemys3[i].x < 0) {
-                enemys3.splice(enemys3.indexOf(enemys3[i]), 1)
-            }
+
             checkCollision3();
             enemys3[i].drawEnemy(ctx);
         }
         for (let i = 0; i < enemys4.length; i++) {
             enemys4[i].update();
-            if (enemys4[i].y < 0) {
-                enemys4.splice(enemys4.indexOf(enemys4[i]), 1)
-            }
             checkCollision4();
             enemys4[i].drawEnemy(ctx);
         }
