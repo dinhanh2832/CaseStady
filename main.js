@@ -354,14 +354,14 @@ let enemys2 = [];
 let enemys3 = [];
 let enemys4 = [];
 let bullesBosss = [];
-let soundFire = new Audio("sound/ban.Mp3")
+let soundFire = new Audio("sound/hit.Mp3")
 let explode = new Audio("sound/no.Mp3")
 let hp = new HP(cuDa.x,cuDa.y,180,10)
 play();
-setInterval(createEnemy1, 1000);
-setInterval(createEnemy2, 1500);
-setInterval(createEnemy3, 2500);
-setInterval(createEnemy4, 2000);
+setInterval(createEnemy1, 2000);
+setInterval(createEnemy2, 2500);
+setInterval(createEnemy3, 3000);
+setInterval(createEnemy4, 4000);
 setInterval(createBulletBoss, 1800);
 canvas.onmousemove = canvasMouseMove;
 canvas.onmousedown = canvasMouseDown;
