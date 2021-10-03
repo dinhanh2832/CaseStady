@@ -76,10 +76,12 @@ function play() {
             bullesBosss[i].move();
             bullesBosss[i].drawBulletBoss();
         }
-        drawHpBoss();
-        drawHp();
+        hpboss.reducerHp();
+        hpboss.draw(ctx);
+        drawPoint();
         playerCollisionBulletBoss();
         bossCollisionBullet();
+        requestAnimationFrame(play)
     }
     hp.reduceHp();
     hp.draw(ctx);
@@ -160,12 +162,6 @@ function drawHp() {
     ctx.font = "25px Arial";
     ctx.fillStyle = "red";
     ctx.fillText('Hp: ' + cuDa.Hp, 500, 40)
-}
-
-function drawHpBoss() {
-    ctx.font = "25px Arial";
-    ctx.fillStyle = "red";
-    ctx.fillText('Hp: ' + boss.HpBoss, 8, 60)
 }
 
 function checkCollision1() {
@@ -356,13 +352,14 @@ let enemys4 = [];
 let bullesBosss = [];
 let soundFire = new Audio("sound/hit.Mp3")
 let explode = new Audio("sound/no.Mp3")
-let hp = new HP(cuDa.x,cuDa.y,180,10)
+let hp = new HP(cuDa.x,cuDa.y,180,10);
+let hpboss = new HPBOSS(1000,10)
 play();
 setInterval(createEnemy1, 2000);
 setInterval(createEnemy2, 2500);
 setInterval(createEnemy3, 3000);
 setInterval(createEnemy4, 4000);
-setInterval(createBulletBoss, 1800);
+setInterval(createBulletBoss, 2300);
 canvas.onmousemove = canvasMouseMove;
 canvas.onmousedown = canvasMouseDown;
 
