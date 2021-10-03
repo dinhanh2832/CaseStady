@@ -4,7 +4,7 @@ class HP {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.speed = 4;
+        this.speed = 6;
     }
     moveLeft(){
         this.x -= this.speed

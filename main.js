@@ -345,7 +345,7 @@ function endGame() {
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 let boss = new Boss(250, 20);
-let cuDa = new Player(600, 400, 180, 160, 4, 'anh/cudaUp.jpg');
+let cuDa = new Player(600, 400, 180, 160, 6, 'anh/cudaUp.jpg');
 cuDa.draw(ctx)
 let angle = 0;
 let bullets = [];
