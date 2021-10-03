@@ -5,6 +5,7 @@ function movePlayer(evt) {
             if (cuDa.x > 0) {
                 cuDa.image = "anh/cudaLeft.jpg";
                 cuDa.moveLeft();
+                hp.moveLeft();
             }
             break;
         case 39:
@@ -12,6 +13,7 @@ function movePlayer(evt) {
             if (cuDa.x < 1200 - cuDa.width) {
                 cuDa.image = "anh/cudaRight.jpg";
                 cuDa.moveRight();
+                hp.moveRight()
             }
             break;
         case 38:
@@ -19,6 +21,7 @@ function movePlayer(evt) {
             if (cuDa.y > 0) {
                 cuDa.image = "anh/cudaUp.jpg";
                 cuDa.moveUp();
+                hp.moveUp();
             }
             break;
         case 40:
@@ -26,6 +29,7 @@ function movePlayer(evt) {
             if (cuDa.y < 700 - cuDa.height) {
                 cuDa.image = "anh/cudaDown.jpg";
                 cuDa.moveDown();
+                hp.moveDown();
             }
             break;
     }
@@ -77,6 +81,8 @@ function play() {
         playerCollisionBulletBoss();
         bossCollisionBullet();
     }
+    hp.reduceHp();
+    hp.draw(ctx);
     drawPoint();
     endGame()
     playerCollisionEnemy1();
@@ -350,6 +356,7 @@ let enemys4 = [];
 let bullesBosss = [];
 let soundFire = new Audio("sound/ban.Mp3")
 let explode = new Audio("sound/no.Mp3")
+let hp = new HP(cuDa.x,cuDa.y,180,10)
 play();
 setInterval(createEnemy1, 1000);
 setInterval(createEnemy2, 1500);
