@@ -48,7 +48,7 @@ function play() {
             bullets.splice(bullets.indexOf(bullets[i]), 1)
         }
     }
-    if (cuDa.point < 2) {
+    if (cuDa.point < 100) {
         for (let i = 0; i < enemys1.length; i++) {
             enemys1[i].update();
             checkCollision1();
