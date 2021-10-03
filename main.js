@@ -44,28 +44,42 @@ function play() {
     for (let i = 0; i < bullets.length; i++) {
         bullets[i].move();
         bullets[i].draw(ctx);
+        if (bullets[i].x < 0 || bullets[i].x > 1300 || bullets[i].y < 0 || bullets[i].y > 800) {
+            bullets.splice(bullets.indexOf(bullets[i]), 1)
+        }
     }
-    if (cuDa.point < 100) {
+    if (cuDa.point < 2) {
         for (let i = 0; i < enemys1.length; i++) {
             enemys1[i].update();
             checkCollision1();
             enemys1[i].drawEnemy(ctx);
+            if (enemys1[i].y > 800){
+                enemys1.splice(enemys1.indexOf(enemys1[i]),1)
+            }
         }
         for (let i = 0; i < enemys2.length; i++) {
             enemys2[i].update();
             checkCollision2();
             enemys2[i].drawEnemy(ctx);
+            if (enemys2[i].x > 1300){
+                enemys2.splice(enemys2.indexOf(enemys2[i]),1)
+            }
         }
         for (let i = 0; i < enemys3.length; i++) {
             enemys3[i].update();
-
             checkCollision3();
             enemys3[i].drawEnemy(ctx);
+            if (enemys3[i].x < 0){
+                enemys3.splice(enemys3.indexOf(enemys3[i]),1)
+            }
         }
         for (let i = 0; i < enemys4.length; i++) {
             enemys4[i].update();
             checkCollision4();
             enemys4[i].drawEnemy(ctx);
+            if (enemys4[i].y < 0){
+                enemys4.splice(enemys4.indexOf(enemys4[i]),1)
+            }
         }
         drawHp();
     } else {
@@ -75,13 +89,15 @@ function play() {
         for (let i = 0; i < bullesBosss.length; i++) {
             bullesBosss[i].move();
             bullesBosss[i].drawBulletBoss();
+            if (bullesBosss[i].y > 700){
+                bullesBosss.splice(bullesBosss.indexOf(bullesBosss[i]),1)
+            }
         }
         hpboss.reducerHp();
         hpboss.draw(ctx);
         drawPoint();
         playerCollisionBulletBoss();
         bossCollisionBullet();
-        requestAnimationFrame(play)
     }
     hp.reduceHp();
     hp.draw(ctx);
@@ -297,10 +313,10 @@ function playerCollisionEnemy4() {
 function playerCollisionBulletBoss() {
     for (let j = 0; j < bullesBosss.length; j++) {
         if (bullesBosss[j].status === 1) {
-            if (bullesBosss[j].x + 30 > cuDa.x && bullesBosss[j].x + 30 < cuDa.x + 180 ||
-                bullesBosss[j].x > cuDa.x && bullesBosss[j].x < cuDa.x + 180) {
-                if (bullesBosss[j].y + 60 > cuDa.y && bullesBosss[j].y + 60 < cuDa.y + 160 ||
-                    cuDa.y < bullesBosss[j].y && bullesBosss[j].y < cuDa.y + 160) {
+            if (bullesBosss[j].x + 30 > cuDa.x && bullesBosss[j].x + 30 < cuDa.x + 90 ||
+                bullesBosss[j].x > cuDa.x && bullesBosss[j].x < cuDa.x + 90) {
+                if (bullesBosss[j].y + 60 > cuDa.y && bullesBosss[j].y + 60 < cuDa.y + 90 ||
+                    cuDa.y < bullesBosss[j].y && bullesBosss[j].y < cuDa.y + 90) {
                     bullesBosss[j].status = 2;
                     cuDa.Hp--;
                 }
@@ -333,7 +349,7 @@ function endGame() {
     }
     if (boss.HpBoss === 0) {
         alert('Điểm số của bạn là: ' + cuDa.point);
-        cuDa.Hp = 15
+        boss.HpBoss = 100;
         location.replace("index.html");
     }
 }
@@ -355,11 +371,11 @@ let explode = new Audio("sound/no.Mp3")
 let hp = new HP(cuDa.x,cuDa.y,180,10);
 let hpboss = new HPBOSS(1000,10)
 play();
-setInterval(createEnemy1, 2000);
-setInterval(createEnemy2, 2500);
-setInterval(createEnemy3, 3000);
-setInterval(createEnemy4, 4000);
-setInterval(createBulletBoss, 2300);
+setInterval(createEnemy1, 1900);
+setInterval(createEnemy2, 2400);
+setInterval(createEnemy3, 2900);
+setInterval(createEnemy4, 3500);
+setInterval(createBulletBoss, 2500);
 canvas.onmousemove = canvasMouseMove;
 canvas.onmousedown = canvasMouseDown;
 
