@@ -40,8 +40,8 @@
 </h2>
 <script>
     navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
-
-        var x = document.getElementById("Audio");
+        let x = document.getElementById("Audio");
+        x.volume = 0.2;
         x.play();
         stream.getTracks().forEach(function (track) { track.stop(); });
     });

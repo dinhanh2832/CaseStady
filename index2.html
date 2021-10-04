@@ -17,9 +17,9 @@
     <source src="sound/nhacnengame.Mp3" type="audio/mpeg">
 </audio>
 <script>
-    var x = document.getElementById("Audio2");
+    let x = document.getElementById("Audio2");
     navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
-        x.volume = 0.1;
+        x.volume = 0.2;
         x.play();
         stream.getTracks().forEach(function (track) { track.stop(); });
     });

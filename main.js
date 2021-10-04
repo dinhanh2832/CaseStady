@@ -161,7 +161,7 @@ function canvasMouseMove(pos) {
 function canvasMouseDown() {
     cuDa.fire();
     soundFire.play();
-    soundFire.volume = 0.1;
+    soundFire.volume = 0.2;
 }
 
 function createBulletBoss() {
