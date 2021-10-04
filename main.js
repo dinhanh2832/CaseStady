@@ -348,7 +348,7 @@ function endGame() {
         location.replace("index.html");
     }
     if (boss.HpBoss === 0) {
-        alert('Điểm số của bạn là: ' + cuDa.point);
+        alert('Ghê quá bạn eieiiiiiii. khó vậy mà cũng thắng đc');
         boss.HpBoss = 100;
         location.replace("index.html");
     }
