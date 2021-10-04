@@ -3,7 +3,7 @@ function movePlayer(evt) {
         case 37:
             cuDa.direction = 37;
             if (cuDa.x > 0) {
-                cuDa.image = "anh/cudaLeft.jpg";
+                cuDa.image = "anh/cudaR.jpg";
                 cuDa.moveLeft();
                 hp.moveLeft();
             }
@@ -11,7 +11,7 @@ function movePlayer(evt) {
         case 39:
             cuDa.direction = 39;
             if (cuDa.x < 1200 - cuDa.width) {
-                cuDa.image = "anh/cudaRight.jpg";
+                cuDa.image = "anh/cudaL.jpg";
                 cuDa.moveRight();
                 hp.moveRight()
             }
@@ -19,7 +19,7 @@ function movePlayer(evt) {
         case 38:
             cuDa.direction = 38;
             if (cuDa.y > 0) {
-                cuDa.image = "anh/cudaUp.jpg";
+                cuDa.image = "anh/cudaU.jpg";
                 cuDa.moveUp();
                 hp.moveUp();
             }
@@ -27,7 +27,7 @@ function movePlayer(evt) {
         case 40:
             cuDa.direction = 40;
             if (cuDa.y < 700 - cuDa.height) {
-                cuDa.image = "anh/cudaDown.jpg";
+                cuDa.image = "anh/cudaD.jpg";
                 cuDa.moveDown();
                 hp.moveDown();
             }
@@ -161,7 +161,7 @@ function canvasMouseMove(pos) {
 function canvasMouseDown() {
     cuDa.fire();
     soundFire.play();
-    soundFire.volume = 0.2;
+    soundFire.volume = 0.5;
 }
 
 function createBulletBoss() {
@@ -358,7 +358,7 @@ function endGame() {
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 let boss = new Boss(250, 20);
-let cuDa = new Player(600, 400, 180, 160, 6, 'anh/cudaUp.jpg');
+let cuDa = new Player(600, 400, 180, 160, 6, 'anh/cudaU.jpg');
 cuDa.draw(ctx)
 let angle = 0;
 let bullets = [];
